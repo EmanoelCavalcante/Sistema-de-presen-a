@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 import java.util.ArrayList;
 import com.challengeEnglishCourse.br.model.Aula;
-import com.challengeEnglishCourse.br.database.DataBaseHelper;
 
+import com.challengeEnglishCourse.br.database.DataBaseHelper;
 public class AulaDAO {
   private DataBaseHelper dbHelper;
   private SQLiteDataBase db;
@@ -39,6 +39,19 @@ public class AulaDAO {
       Aula aula = new Aula();
       
       aula.setNomeAula(cursor.getString(cursor.getColumnIndexOrThrow("nome_Aula")));
+      
+      aula.setData(cursor.getString(cursor.getColumnIndexOtThrow("data")));
+      
+      aula.setDescricaoAula(cursor.getString(cursor.getColumnIndexOrThrow("descricao_Aula")));
+      
+      aulas.add(aula);
+    }
+    
+    finally {
+      if(cursor != null){
+        cursor.close();
+      }
+      return aulas;
     }
   }
 }
