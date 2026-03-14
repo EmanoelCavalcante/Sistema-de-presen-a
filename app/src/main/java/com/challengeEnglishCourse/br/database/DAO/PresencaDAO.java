@@ -11,10 +11,10 @@ import com.challengeEnglishCourse.br.database.DataBaseHelper;
 
 public class PresencaDAO {
   private DataBaseHelper dbHelper;
-  private SQLiteDataBase db;
-  public PresencaDao(Context context){
+  private SQLiteDatabase db;
+  public PresencaDAO(Context context){
     dbHelper = new DataBaseHelper(context);
-    db = dbHelper.getWritableDataBase();
+    db = dbHelper.getWritableDatabase();
   }
   
   public long inserirPresenca(Presenca presenca){
@@ -24,6 +24,35 @@ public class PresencaDAO {
     values.put("aluno_Id", presenca.getAlunoId());
     values.put("presenca", presenca.isPresenca() ? 1 : 0);
     
-    db.insert("presenca", null, values);
+   return db.insert("presenca", null, values);
+  }
+  
+  public List<Presenca> listarPresencas(){
+    List<Presenca> presencas = new ArrayList<>();
+    
+    Cursor cursor = null;
+    try{
+      cursor = db.rawQuery("SELECT * FROM presenca", null);
+    }
+    while (cursor.moveToNext()){
+      Presenca presenca = new Presenca();
+      
+      presenca.setAulaId(cursor.getInt(cursor.getColumnIndexOrThrow("aula_Id")));
+      
+      presenca.setAlunoId(cursor.getInt(cursor.getColumnIndexOrThrow("aluno_id")));
+      
+      boolean presente = cursor.getInt(cursor.getColumnIndexOrThrow("presenca")) == 1;
+      
+      presenca.isPresenca(presente);
+      
+      presencas.add(presenca);
+    }
+    
+    finally{
+      if(cursor != null){
+        cursor.close();
+      }
+    }
+    return presencas;
   }
 }
