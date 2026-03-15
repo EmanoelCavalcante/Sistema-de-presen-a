@@ -27,12 +27,18 @@ public class PresencaDAO {
    return db.insert("presenca", null, values);
   }
   
-  public List<Presenca> listarPresencas(){
+  public List<Presenca> listarPresencas(int aulaId){
     List<Presenca> presencas = new ArrayList<>();
     
     Cursor cursor = null;
     try{
-      cursor = db.rawQuery("SELECT * FROM presenca", null);
+      cursor = db.rawQuery(
+        "SELECT aluno.nome, presenca.presenca" +
+        "FROM presenca" +
+        "LEFT JOIN aluno ON presenca.aluno_Id = aluno.id"+
+        "WHERE presenca.aula_Id = ?",
+        new String[]{String.valueOf(aulaId)}
+        );
     }
     while (cursor.moveToNext()){
       Presenca presenca = new Presenca();
