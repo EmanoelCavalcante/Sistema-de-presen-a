@@ -1,8 +1,8 @@
 # Sistema-de-chamadas
-Aplicação Java para registro e controle de presença de alunos, utilizando DAO, JDBC e arquitetura em camadas.
+Aplicação Java para registro e controle de presença de alunos, utilizando DAO, SQLite para persistência de dados e arquitetura em camadas.
 # Sistema de Controle de Presença
 
-Este projeto é uma aplicação desenvolvida em **Java** com o objetivo de gerenciar a presença de alunos em sala de aula.
+Este projeto é uma aplicação desenvolvida em **Java** para celulares **Anroid** com o objetivo de gerenciar a presença de alunos em sala de aula.
 
 O sistema permite registrar, consultar e controlar a frequência dos alunos de forma organizada, utilizando boas práticas de programação e arquitetura em camadas.
 
@@ -12,6 +12,7 @@ O sistema permite registrar, consultar e controlar a frequência dos alunos de f
 - Registro de presença
 - Consulta de frequência
 - Gerenciamento de dados em banco de dados
+- Retorno de uma tabela em PDF com a aula, presença e os conceitos usado no dia a dia
 
 ## Tecnologias utilizadas
 
@@ -19,18 +20,57 @@ O sistema permite registrar, consultar e controlar a frequência dos alunos de f
 - Android Studio
 - SQLite
 - Padrão DAO
-- Programação orientada a objetos
+- Git
+- Android SDK
 
-## Estrutura do projeto
+## Arquitetura do projeto
 
-O projeto segue uma arquitetura organizada em camadas:
+O projeto segue uma arquitetura organizada em camadas para separação de responsabilidades:
+UI
+↓
+Repository
+↓
+DAO
+↓
+SQLite Database
 
-- **model** → entidades do sistema
-- **dao** → acesso ao banco de dados
-- **ui**→ controlar as interfaces presentes
-- **repository** → centralizar o acesso ao banco
+
+## Arquitetura do projeto
+com.challengeEnglishCourse.br │ 
+├── model 
+│     └── Aluno.java 
+|     └── Aula.java
+|     └── Presenca.java
+│ 
+├── database 
+│       └── DataBaseHelper.java 
+│ 
+├── database/DAO 
+│       └── AlunoDAO.java
+|       └── AulaDAO.java
+|       └── PresencaDAO.java
+|
+└── repository 
+        └── AlunoRepository.java
 
 
+## Como executar o projeto
+1. Clone o repositório
+   git clone https://github.com/EmanoelCavalcante/Sistema-de-chamadas.git
+2. Abra o projeto no **Android Studio**
+3. Execute em um emulador ou dispositivo físico
+
+
+## Roadmap
+- [x] Operações CRUD
+- [x] Cadastro de alunos
+- [x] Registro de presença
+- [ ] Tratamento de erros
+- [ ] Hisórico de chamadas
+- [ ] Criar interface do aplicativo
+- [ ] Relatório atualizado em PDF
+
+        
 ## Status do projeto
 - Em desenvolvimento
 
