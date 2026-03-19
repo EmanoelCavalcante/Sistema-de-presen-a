@@ -15,12 +15,12 @@ public class AlunoRepository {
     }
 
     public long registrarAluno(Aluno aluno){
-        long id = alunoDAO.inserirAluno(aluno);
+        long id = alunoDAO.inserirAlunos(aluno);
         String matricula = aluno.getMatricula();
         if(id != -1){
           aluno.setId(id);
         }
-      return aluno;
+      return alunoDAO.inserirAlunos(aluno);
     }
     public List<Aluno> listarAlunos(){
        return alunoDAO.listarAlunos();

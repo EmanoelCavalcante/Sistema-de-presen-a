@@ -1,4 +1,4 @@
-package com.challengeEnglishCourse.br.DTO;
+package com.challengeEnglishCourse.br.dto;
 
 public class ChamadaAlunoDTO{
   private long matricula;

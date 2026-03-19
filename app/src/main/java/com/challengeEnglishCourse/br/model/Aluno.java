@@ -1,14 +1,14 @@
 package com.challengeEnglishCourse.br.model;
 
 public class Aluno {
-    private int id;
+    private long id;
     private String nome;
     private long matricula;
 
-    public int getId()
+    public long getId()
     {return id;}
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -20,7 +20,7 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public long getMatricula() {
+    public String getMatricula() {
         return String.valueOf(2026000 + this.id);
     }
 

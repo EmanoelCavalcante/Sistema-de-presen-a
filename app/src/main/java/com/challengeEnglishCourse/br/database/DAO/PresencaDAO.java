@@ -21,7 +21,7 @@ public class PresencaDAO extends BaseDAO{
     private ChamadaAlunoDTO cursorParaPresenca(Cursor cursor){
         ChamadaAlunoDTO dto = new ChamadaAlunoDTO();
 
-        dto.setMatricula(cursor.getString(cursor.getColumnIndexOrThrow("matricula")));
+        dto.setMatricula(Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow("matricula"))));
         dto.setNome(cursor.getString(cursor.getColumnIndexOrThrow("nome")));
 
         boolean presenca =

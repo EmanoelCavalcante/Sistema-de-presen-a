@@ -27,7 +27,7 @@ public class PresencaRepository {
     return presencaDAO.atualizarPresenca(presenca);
   }
   
-  public long deletarPresenca(int aulaId, int alunoId){
-    return presencaDAO.deletarPresenca(aulaId, alunoId);
+  public long deletePresenca(int aulaId, int alunoId){
+    return presencaDAO.deletePresenca(aulaId, alunoId);
   }
 }

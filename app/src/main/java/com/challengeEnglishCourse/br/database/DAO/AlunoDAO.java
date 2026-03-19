@@ -72,7 +72,7 @@ public class AlunoDAO extends BaseDAO {
       try{
         cursor = db.rawQuery(
 
-          "SELECT * FROM aluno WHERE matricula=? ", new String[]{matricula}
+          "SELECT * FROM aluno WHERE matricula=? ", new String[]{String.valueOf(matricula)}
         );
 
             if (cursor != null && cursor.moveToFirst()){
