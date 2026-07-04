@@ -10,9 +10,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(Context context){
         super(context,
-                DB_NAME,
-                null,
-                DB_VERSION);
+                DB_NAME, null, DB_VERSION);
     }
 
     @Override
@@ -23,36 +21,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE aluno(" +
+
+        db.execSQL("CREATE TABLE aluno(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "nome TEXT," +
-            "matricula TEXT)");
+            "nome TEXT NOT NULL," +
+            "matricula TEXT NOT NULL UNIQUE)");
+
+        db.execSQL("CREATE TABLE aula("+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "nome_aula TEXT NOT NULL,"+
+            "data TEXT NOT NULL,"+
+            "descricao_aula TEXT)");
 
         db.execSQL("CREATE TABLE presenca (" +
         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        "aluno_Id INTEGER, " +
-        "aula_Id INTEGER, " +
-        "presenca INTEGER, " +
+        "aluno_id INTEGER NOT NULL, " +
+        "aula_id INTEGER NOT NULL, " +
+        "presente INTEGER NOT NULL DEFAULT 0 CHECK(presente IN (0, 1)), " +
         
-        "FOREIGN KEY (aluno_Id) REFERENCES aluno(id) ON DELETE CASCADE, " +
-        "FOREIGN KEY (aula_Id) REFERENCES aula(id) ON DELETE CASCADE, " +
+        "FOREIGN KEY (aluno_id) REFERENCES aluno(id) ON DELETE CASCADE, " +
+        "FOREIGN KEY (aula_id) REFERENCES aula(id) ON DELETE CASCADE, " +
 
-         "UNIQUE(aula_Id, aluno_Id)," +
+         "UNIQUE(aula_id, aluno_id)" +
 
          ");");
 
-        db.execSQL("CREATE TABLE aula("+
-                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "nome_Aula TEXT,"+
-                "data TEXT,"+
-                "descricao_Aula TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS presenca");
         db.execSQL("DROP TABLE IF EXISTS aluno");
         db.execSQL("DROP TABLE IF EXISTS aula");
-        db.execSQL("DROP TABLE IF EXISTS presenca");
         onCreate(db);
     }
 }
